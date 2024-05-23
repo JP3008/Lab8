@@ -8,6 +8,9 @@ public class BTree implements Tree {
     public BTree(){
         this.root = null;
     }
+    public BTreeNode getRoot(){
+        return this.root;
+    }
 
     @Override
     public int size() throws TreeException {
@@ -97,72 +100,61 @@ public class BTree implements Tree {
 
     @Override
     public void remove(Object element) throws TreeException {
-        if(isEmpty())
+        if (isEmpty())
             throw new TreeException("Binary Tree is empty");
-        root = remove(root,element);
+        root = remove(root, element);
     }
 
     private BTreeNode remove(BTreeNode node, Object element) {
-
         if (node != null) {
-
             if (util.Utility.compare(element, node.data) == 0) {
-
                 if (node.left == null && node.right == null) {
-                    return null;
-                    //Case 2, solo tiene un hijo
-                } else if (node.left == null && node.right != null) {
-                    node.right = newPath(node.right,node.path);
-                    return node.right;
-                } else if (node.left != null && node.right == null) {
-                    //node.left = newPath(node.left,node.path);
-                    return node.left;
-                }
-
-                if (node.left != null && node.right != null) {
+                    return null; // Caso 1: sin hijos
+                } else if (node.left == null) {
+                    return node.right; // Caso 2: un hijo (derecha)
+                } else if (node.right == null) {
+                    return node.left; // Caso 2: un hijo (izquierda)
+                } else {
+                    // Caso 3: dos hijos
                     Object value = getLeaf(node.right);
                     node.data = value;
                     node.right = removeLeaf(node.right, value);
                 }
+            } else {
+                node.left = remove(node.left, element);
+                node.right = remove(node.right, element);
             }
-
-            node.left = remove(node.left, element);
-            node.right = remove(node.left, element);
         }
         return node;
     }
 
-    private BTreeNode newPath(BTreeNode node, String path) {
-        //if (node!=null){
-        return node;
-    }
-
     private BTreeNode removeLeaf(BTreeNode node, Object value) {
-        if (node==null){
+        if (node == null) {
             return null;
-        }else if (node.left==null && node.right==null && Utility.compare(node.data, value)==0){
+        } else if (node.left == null && node.right == null && util.Utility.compare(node.data, value) == 0) {
             return null;
-        }else {
-            node.left = removeLeaf(node.left,value);
-            node.right= removeLeaf(node.right,value);
+        } else {
+            node.left = removeLeaf(node.left, value);
+            node.right = removeLeaf(node.right, value);
             return node;
         }
     }
 
     private Object getLeaf(BTreeNode node) {
         Object aux;
-        if (node==null){
+        if (node == null) {
             return null;
-        }else if (node.right==null&&node.left==null){
+        } else if (node.left == null && node.right == null) {
             return node.data;
-        }else{
+        } else {
             aux = getLeaf(node.left);
-            if (aux==null){
-                aux=getLeaf(node.right);
+            if (aux == null) {
+                aux = getLeaf(node.right);
             }
             return aux;
         }
     }
+
 
     @Override
     public int height(Object element) throws TreeException {

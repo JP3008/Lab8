@@ -62,6 +62,6 @@ public class HelloController {
 
     @FXML
     public void bTreeOperationsOnAction(ActionEvent actionEvent) {
-        loadPage("bTreeOperations.fxml");
+        loadPage("graphicOperations.fxml");
     }
 }
