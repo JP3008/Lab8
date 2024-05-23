@@ -50,7 +50,7 @@ public interface Tree {
 
     //recorre el árbol de la forma: hijo izq-nodo-hijo der,
     //para mostrar todos los elementos existentes
-    public String InOrder() throws TreeException;
+    public String inOrder() throws TreeException;
     //private String InOrder(BTreeNode node)
 
     ////recorre el árbol de la forma: hijo izq-hijo der-nodo,
