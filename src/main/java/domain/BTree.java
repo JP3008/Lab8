@@ -227,7 +227,7 @@ public class BTree implements Tree {
         if(isEmpty()){
             throw new TreeException("Binary Tree is empty");
         }
-        return inOrder(root)+"\n";
+        return "InOrder Tour: \n" + inOrder(root);
     }
 
     //left-node-right
@@ -246,7 +246,7 @@ public class BTree implements Tree {
         if (isEmpty()) {
             throw new TreeException("Binary Tree is empty");
         }
-        return postOrder(root) + "\n";
+        return "PostOrder Tour: \n" + postOrder(root);
     }
 
     //left-right-node
@@ -261,6 +261,34 @@ public class BTree implements Tree {
         return result;
     }
 
+
+    public String preorderTour(BTreeNode node) {
+        String result="";
+        if (node!=null){
+            result="(" + node.path + ") ";
+        }
+        return result;
+
+    }
+
+    public String BtreeTour() throws TreeException {
+        if (isEmpty()) {
+            throw new TreeException("El árbol está vacío");
+        }
+        return "PreOrder Tour: \n" + BtreeTour(root);
+
+    }
+
+    private String BtreeTour(BTreeNode node) {
+        String result="";
+        if (node!=null){
+            result=node.data + " ";
+            result+=BtreeTour(node.left);
+            result+=BtreeTour(node.right);
+        }
+        return result;
+
+    }
 
     //preOrder: recorre el árbol de la forma: nodo-izq-der
     //inOrder: recorre el árbol de la forma: izq-nodo-der
