@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="602.0" prefWidth="983.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TransversalTour">
+   <children>
+      <Pane fx:id="pane" layoutX="-1.0" layoutY="161.0" prefHeight="441.0" prefWidth="983.0" />
+      <Pane prefHeight="58.0" prefWidth="983.0" />
+      <Pane layoutY="62.0" prefHeight="98.0" prefWidth="983.0">
+         <children>
+            <Button layoutX="14.0" layoutY="3.0" mnemonicParsing="false" onAction="#RandomizeButton" prefHeight="25.0" prefWidth="180.0" text="Randomize" />
+            <Button layoutX="581.0" layoutY="3.0" mnemonicParsing="false" onAction="#postOrderOnAction" prefHeight="25.0" prefWidth="180.0" text="Post Order" />
+            <Button layoutX="204.0" layoutY="3.0" mnemonicParsing="false" onAction="#preOrderOnAction" prefHeight="25.0" prefWidth="180.0" text="Pre Order" />
+            <Button layoutX="393.0" layoutY="3.0" mnemonicParsing="false" onAction="#inOrderOnAction" prefHeight="25.0" prefWidth="180.0" text="In Order" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

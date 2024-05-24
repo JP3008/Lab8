@@ -212,7 +212,7 @@ public class BTree implements Tree {
     }
 
     //node-left-right
-    private String preOrder(BTreeNode node){
+    public String preOrder(BTreeNode node){
         String result="";
         if(node!=null){
             result =  node.data+"("+node.path+") ";
@@ -303,4 +303,5 @@ public class BTree implements Tree {
         result+="PostOrder: "+postOrder(root)+"\n";
         return result;
     }
+
 }
