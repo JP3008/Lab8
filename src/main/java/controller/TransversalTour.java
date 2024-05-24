@@ -22,14 +22,6 @@ public class TransversalTour
     @javafx.fxml.FXML
     public void initialize() {
         bTree = new BTree();
-        generateInitialTree();
-    }
-    private void generateInitialTree() {
-        int numberOfNodes = util.Utility.getRandom(24) + 8;
-        for (int i = 0; i < numberOfNodes; i++) {
-            bTree.add(util.Utility.getRandom(100)); // Usando valores aleatorios entre 0 y 99
-        }
-        drawTree();
     }
 
     private void drawTree() {
@@ -44,7 +36,7 @@ public class TransversalTour
         }
 
         Circle circle = new Circle(x, y, NODE_RADIUS);
-        circle.setFill(Color.PALEGREEN);
+        circle.setFill(Color.WHITE);
         circle.setStroke(Color.BLACK);
 
         Text text = new Text(x - 4, y + 4, node.data.toString());
@@ -99,7 +91,7 @@ public class TransversalTour
         }
 
         Circle circle = new Circle(x, y, NODE_RADIUS);
-        circle.setFill(Color.PALEGREEN);
+        circle.setFill(Color.WHITE);
         circle.setStroke(Color.BLACK);
 
         Text text = new Text(x - 4, y + 4, node.data.toString());
@@ -150,7 +142,7 @@ public class TransversalTour
 
         // Luego dibuja el nodo actual
         Circle circle = new Circle(x, y, NODE_RADIUS);
-        circle.setFill(Color.PALEGREEN);
+        circle.setFill(Color.WHITE);
         circle.setStroke(Color.BLACK);
 
         Text text = new Text(x - 4, y + 4, node.data.toString());
@@ -193,7 +185,7 @@ public class TransversalTour
 
         // Luego dibuja el nodo actual
         Circle circle = new Circle(x, y, NODE_RADIUS);
-        circle.setFill(Color.PALEGREEN);
+        circle.setFill(Color.WHITE);
         circle.setStroke(Color.BLACK);
 
         Text text = new Text(x - 4, y + 4, node.data.toString());

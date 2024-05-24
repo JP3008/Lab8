@@ -11,7 +11,7 @@
     }
 
     .button:hover {
-        -fx-background-color: brown;
+        -fx-background-color: GRAY;
         -fx-scale-y: 1.1;
     }
 
