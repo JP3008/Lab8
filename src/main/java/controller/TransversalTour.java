@@ -84,17 +84,12 @@ public class TransversalTour
         drawTree();
     }
 
-
-    @javafx.fxml.FXML
-    public void inOrderOnAction(ActionEvent actionEvent) {
-    }
-
     @javafx.fxml.FXML
     public void preOrderOnAction(ActionEvent actionEvent) {
-        pane.getChildren().clear(); // Limpiar el panel antes de dibujar otro árbol
+        pane.getChildren().clear(); // Limpia el panel antes de dibujar otro árbol
         double paneWidth = pane.getWidth();
         int[] counter = new int[1]; // Arreglo de un solo elemento para mantener el contador
-        counter[0] = 1; // Ponemos el contador en 1 para el primer nodo
+        counter[0] = 1; // Ponemos el contador en 1 para el primer nodo, por que por defecto en Java lo tira en 0
         drawTreeRecursivelyPreOrder(bTree.getRoot(), paneWidth / 2, 2 * NODE_RADIUS, paneWidth / 4, counter);
     }
 
@@ -109,7 +104,7 @@ public class TransversalTour
 
         Text text = new Text(x - 4, y + 4, node.data.toString());
 
-        // Muestra el número de orden en el recorrido preorden debajo de cada nodo
+        // Muestra el número de orden en el recorrido preorden debajo de cada circulito/nodo
         Text orderText = new Text(x - 4, y + 25, Integer.toString(counter[0]));
         counter[0]++;
 
@@ -139,7 +134,7 @@ public class TransversalTour
         if (bTree != null) {
             pane.getChildren().clear();
             double paneWidth = pane.getWidth();
-            int[] counter = {1}; // Contador para rastrear el número de nodos visitados
+            int[] counter = {1}; // contador para nodos visitados
             drawTreeRecursivelyPostOrder(bTree.getRoot(), paneWidth / 2, 2 * NODE_RADIUS, paneWidth / 4, counter);
        }
     }
@@ -149,35 +144,82 @@ public class TransversalTour
             return;
         }
 
-        // Dibujar los hijos izquierdo y derecho primero (postorden)
+        // Traza los hijos izquierdo y derecho primero (postorden)
         drawTreeRecursivelyPostOrder(node.left, x - hGap, y + VERTICAL_GAP, hGap / 2, counter);
         drawTreeRecursivelyPostOrder(node.right, x + hGap, y + VERTICAL_GAP, hGap / 2, counter);
 
-        // Luego dibujar el nodo actual
+        // Luego dibuja el nodo actual
         Circle circle = new Circle(x, y, NODE_RADIUS);
         circle.setFill(Color.PALEGREEN);
         circle.setStroke(Color.BLACK);
 
         Text text = new Text(x - 4, y + 4, node.data.toString());
 
-        // Mostrar el número de orden en el recorrido postorden debajo de cada nodo
+        // Tira el número de orden en el recorrido postorden debajo de cada nodo
         Text orderText = new Text(x - 4, y + 25, Integer.toString(counter[0]));
         counter[0]++;
 
         pane.getChildren().addAll(circle, text, orderText);
 
-        // Dibujar línea desde el nodo hasta su hijo izquierdo
+        // Pone línea desde el nodo hasta su hijo izquierdo
         if (node.left != null) {
             Line lineLeft = new Line(x, y + NODE_RADIUS, x - hGap, y + VERTICAL_GAP - NODE_RADIUS);
             pane.getChildren().add(lineLeft);
         }
 
-        // Dibujar línea desde el nodo hasta su hijo derecho
+        // Ponee línea desde el nodo hasta su hijo derecho
         if (node.right != null) {
             Line lineRight = new Line(x, y + NODE_RADIUS, x + hGap, y + VERTICAL_GAP - NODE_RADIUS);
             pane.getChildren().add(lineRight);
         }
     }
+    @javafx.fxml.FXML
+    public void inOrderOnAction(ActionEvent actionEvent) {
+        if (bTree != null) {
+            pane.getChildren().clear(); // Limpia el panel antes de dibujar otro árbol
+            double paneWidth = pane.getWidth();
+            int[] counter = {1}; // ve los nodos visitados
+            drawTreeRecursivelyInOrder(bTree.getRoot(), paneWidth / 2, 2 * NODE_RADIUS, paneWidth / 4, counter);
+        }
+    }
+
+    private void drawTreeRecursivelyInOrder(BTreeNode node, double x, double y, double hGap, int[] counter) {
+        if (node == null) {
+            return;
+        }
+
+        // Dibuja el hijo izquierdo primero (inorden)
+        drawTreeRecursivelyInOrder(node.left, x - hGap, y + VERTICAL_GAP, hGap / 2, counter);
+
+        // Luego dibuja el nodo actual
+        Circle circle = new Circle(x, y, NODE_RADIUS);
+        circle.setFill(Color.PALEGREEN);
+        circle.setStroke(Color.BLACK);
+
+        Text text = new Text(x - 4, y + 4, node.data.toString());
+
+        // Tira el número de orden en el recorrido inorden debajo de cada nodo
+        Text orderText = new Text(x - 4, y + 25, Integer.toString(counter[0]));
+        counter[0]++;
+
+        pane.getChildren().addAll(circle, text, orderText);
+
+        // Tira la línea desde el nodo hasta su hijo izquierdo
+        if (node.left != null) {
+            Line lineLeft = new Line(x, y + NODE_RADIUS, x - hGap, y + VERTICAL_GAP - NODE_RADIUS);
+            pane.getChildren().add(lineLeft);
+        }
+
+        // Tira la línea desde el nodo hasta su hijo derecho
+        if (node.right != null) {
+            Line lineRight = new Line(x, y + NODE_RADIUS, x + hGap, y + VERTICAL_GAP - NODE_RADIUS);
+            pane.getChildren().add(lineRight);
+        }
+
+        // Pone el hijo derecho después (inorden)
+        drawTreeRecursivelyInOrder(node.right, x + hGap, y + VERTICAL_GAP, hGap / 2, counter);
+    }
+
 
 }
 
