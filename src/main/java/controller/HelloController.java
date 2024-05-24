@@ -52,7 +52,7 @@ public class HelloController {
 
     @FXML
     public void graphicBTreeOnAction(ActionEvent actionEvent) {
-        loadPage("graphicBTree.fxml");
+        loadPage("GraphicBTree.fxml");
     }
 
     @FXML
