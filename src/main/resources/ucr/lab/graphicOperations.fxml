@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="603.0" prefWidth="1269.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GraphicOperations">
+<AnchorPane prefHeight="781.0" prefWidth="1309.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GraphicOperations">
    <children>
-      <Pane fx:id="pane" layoutX="-1.0" layoutY="161.0" prefHeight="442.0" prefWidth="1270.0" />
+      <Pane fx:id="pane" layoutY="170.0" prefHeight="611.0" prefWidth="1307.0" />
       <Pane prefHeight="58.0" prefWidth="1269.0" style="-fx-background-color: #308DEA;">
          <children>
-            <Label layoutY="-2.0" prefHeight="66.0" prefWidth="1315.0" text="                    Graphic Binary Tree - Operations" textAlignment="CENTER">
+            <Label layoutY="-2.0" prefHeight="66.0" prefWidth="1363.0" text="                    Graphic Binary Tree - Operations" textAlignment="CENTER">
                <font>
                   <Font name="System Bold Italic" size="36.0" />
                </font>
             </Label>
          </children></Pane>
-      <Pane layoutY="59.0" prefHeight="111.0" prefWidth="1270.0">
+      <Pane layoutY="59.0" prefHeight="111.0" prefWidth="1307.0">
          <children>
             <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#RandomizeButton" prefHeight="25.0" prefWidth="209.0" text="Randomize" />
             <Button layoutX="14.0" layoutY="57.0" mnemonicParsing="false" onAction="#containsOnAction" prefHeight="25.0" prefWidth="209.0" text="Contains" />
