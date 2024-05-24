@@ -13,8 +13,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
-public class GraphicOperations
-{
+public class GraphicOperations {
     @FXML
     private Pane pane;
 
@@ -50,10 +49,11 @@ public class GraphicOperations
         }
         drawTree();
     }
-    public void levelsOnAction(ActionEvent actionEvent){
 
+    public void levelsOnAction(ActionEvent actionEvent) {
         drawTreeLevels();
     }
+
     private void drawTreeLevels() {
         pane.getChildren().clear(); // Clear the pane before drawing
 
@@ -74,9 +74,7 @@ public class GraphicOperations
 
         Text text = new Text(x - 4, y + 4, node.data.toString());
 
-
         pane.getChildren().addAll(circle, text);
-
 
         if (node.left != null) {
             double childX = x - hGap;
@@ -107,18 +105,14 @@ public class GraphicOperations
         }
     }
 
-
-
-
-
     private void drawTree() {
         pane.getChildren().clear(); // limpia el panel antes de dibujar otro arbol
 
         double paneWidth = pane.getWidth();
-        drawTreeRecursively(bTree.getRoot(), paneWidth / 2, NODE_RADIUS * 2, paneWidth / 4);
+        drawTreeRecursively(bTree.getRoot(), paneWidth / 2, NODE_RADIUS * 2, paneWidth / 4, false);
     }
 
-    private void drawTreeRecursively(BTreeNode node, double x, double y, double hGap) {
+    private void drawTreeRecursively(BTreeNode node, double x, double y, double hGap, boolean isLeftChild) {
         if (node == null) {
             return;
         }
@@ -128,9 +122,14 @@ public class GraphicOperations
         circle.setStroke(Color.BLACK);
 
         Text text = new Text(x - 4, y + 4, node.data.toString());
-        Text textTour = new Text(x - 30, y + 40, node.data.toString());
 
-        pane.getChildren().addAll(circle, text, textTour);
+        // Solo mostrar el path si es un hijo izquierdo
+        if (isLeftChild && node.path != null || node == bTree.getRoot()) {
+            Text textTour = new Text(x - 30, y + 40, node.path);
+            pane.getChildren().add(textTour);
+        }
+
+        pane.getChildren().addAll(circle, text);
 
         if (node.left != null) {
             double childX = x - hGap;
@@ -138,7 +137,7 @@ public class GraphicOperations
 
             Line line = new Line(x, y + NODE_RADIUS, childX, childY - NODE_RADIUS);
             pane.getChildren().add(line);
-            drawTreeRecursively(node.left, childX, childY-35, hGap / 2);
+            drawTreeRecursively(node.left, childX, childY - 35, hGap / 2, true);
         }
 
         if (node.right != null) {
@@ -147,12 +146,13 @@ public class GraphicOperations
 
             Line line = new Line(x, y + NODE_RADIUS, childX, childY - NODE_RADIUS);
             pane.getChildren().add(line);
-            drawTreeRecursively(node.right, childX, childY-35, hGap / 2);
+            drawTreeRecursively(node.right, childX, childY - 35, hGap / 2, false);
         }
     }
 
     private static final int NODE_RADIUS = 20;
     private static final int VERTICAL_GAP = 100;
+
     //Obtener la altura de un nodo especifico
     @FXML
     public void nodeHeightOnAction(ActionEvent actionEvent) {
@@ -192,21 +192,23 @@ public class GraphicOperations
             }
         }
     }
+
     //Remove un nodo del arbol al azar
     @FXML
     public void removeOnAction(ActionEvent actionEvent) throws TreeException {
         int eliminateValue;
         try{
-        do {
-            eliminateValue = util.Utility.getRandom(100);
-        } while (!bTree.contains(eliminateValue));
-        bTree.remove(eliminateValue);
-        drawTree();
+            do {
+                eliminateValue = util.Utility.getRandom(100);
+            } while (!bTree.contains(eliminateValue));
+            bTree.remove(eliminateValue);
+            drawTree();
         } catch (TreeException e) {
             alert.setContentText("The tree is empty");
             alert.showAndWait();
         }
     }
+
     //Agregar un nodo al azar
     @FXML
     public void addOnAction(ActionEvent actionEvent) {
@@ -214,6 +216,7 @@ public class GraphicOperations
         bTree.add(newValue);
         drawTree();
     }
+
     //Demostrar si el valor ingresado hasta contenido en el arbol
     @FXML
     public void containsOnAction(ActionEvent actionEvent) {
@@ -253,6 +256,7 @@ public class GraphicOperations
             }
         }
     }
+
     //Obtener la altura que tiene el arbol
     @FXML
     public void treeHeightOnAction(ActionEvent actionEvent) throws TreeException {
