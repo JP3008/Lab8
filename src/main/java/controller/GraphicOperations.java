@@ -30,6 +30,7 @@ public class GraphicOperations {
         // Agregar un listener para dibujar el árbol cuando el pane cambie de tamaño
         pane.widthProperty().addListener((obs, oldVal, newVal) -> drawTree());
         pane.heightProperty().addListener((obs, oldVal, newVal) -> drawTree());
+        pane.setStyle("-fx-background-color: lightblue;");
     }
 
     private void generateInitialTree() {
