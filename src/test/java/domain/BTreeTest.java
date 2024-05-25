@@ -19,9 +19,10 @@ class BTreeTest {
     @Test
     public void Test() throws TreeException, StackException, QueueException, ListException {
 
+        //Declaración de arbol
     BTree bt = new BTree();
 
-
+//Rellana la lista
         SinglyLinkedList sl = new SinglyLinkedList();
         for (int i = 0; i < 20; i++) {
             sl.add(Utility.getRandom(50));
@@ -29,7 +30,7 @@ class BTreeTest {
 
         bt.add(sl);
 
-
+        //Declara y crea un arreglo de nombres en una circularlinkedlist
         CircularDoublyLinkedList cdl = new CircularDoublyLinkedList();
 
         String[] names = {
@@ -44,6 +45,7 @@ class BTreeTest {
 
         bt.add(cdl);
 
+        //Stack de países en un array
         LinkedStack ls = new LinkedStack();
         String[] countries = {
                 "Argentina", "Brasil", "Canadá", "Costa Rica", "Dinamarca", "Egipto", "Francia", "Alemania", "Japón", "México"
@@ -55,6 +57,7 @@ class BTreeTest {
 
         bt.add(ls);
 
+        //LinkedQueue de numeros aleatorios
         LinkedQueue lq = new LinkedQueue();
 
         for (int i = 0; i <100; i++) {
@@ -62,6 +65,8 @@ class BTreeTest {
         }
         bt.add(lq);
 
+
+        //Arbolbinario de letras
         BTree btreeChars = new BTree();
 
         char[] alpha = {
@@ -71,6 +76,8 @@ class BTreeTest {
         for (int i = 0; i <27 ; i++) {
             btreeChars.add(alpha[i]);
         }
+
+        //Puntos adicionales
         System.out.println("///////////////////////////");
         bt.add(btreeChars);
 
@@ -84,6 +91,7 @@ class BTreeTest {
         System.out.println("///////////////////////////");
         System.out.println("Btree countains Binary Tree of chars "+(bt.contains(btreeChars)?" True!":" False."));
         System.out.println("///////////////////////////");
+        //Se rmueve la variable
         bt.remove(lq);
 
         for (int i = 0; i < 5; i++) {
@@ -95,32 +103,36 @@ class BTreeTest {
             }
         }
 
-
+        //Quita los nombres en orden
         for (int i = 0; i <5 ; i++) {
             cdl.remove(names[i]);
             }
 
+        //Los saca del stack correctamente
         for (int i = 0; i <5 ; i++) {
             ls.pop();
         }
 
+        //Remueve una letra aleatoria del arreglo
         for (int i = 0; i <5 ; i++) {
             btreeChars.remove(alpha[Utility.getRandom(26)]);
         }
 
+
+        //Resultados
         System.out.println("Modified tree: \n"+bt);
         System.out.println("///////////////////////////");
 
-        System.out.println("Height of SinglyLinkedList: "+(!bt.contains(sl)?"No longer there!":bt.height(sl)));
+        System.out.println("Height of SinglyLinkedList: "+bt.height(sl));
         System.out.println("///////////////////////////");
 
-        System.out.println("Height of CircularDoublyLinkedList: "+(!bt.contains(cdl)?"No longer there!":bt.height(cdl)));
+        System.out.println("Height of CircularDoublyLinkedList: "+(bt.height(cdl)));
         System.out.println("///////////////////////////");
 
-        System.out.println("Height of LinkedStack "+(!bt.contains(cdl)?"No longer there!":bt.height(cdl)));;
+        System.out.println("Height of LinkedStack "+bt.height(ls));
         System.out.println("///////////////////////////");
 
-        System.out.println("Height of BinaryTree for Chars "+(!bt.contains(btreeChars)?"No longer there!":bt.height(btreeChars)));
+        System.out.println("Height of BinaryTree for Chars "+bt.height(btreeChars));
 
 
 

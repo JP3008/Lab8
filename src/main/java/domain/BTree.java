@@ -59,6 +59,29 @@ public class BTree implements Tree {
                     || binarySearch(node.right, element);
     }
 
+
+    private BTreeNode contains2(Object element) throws TreeException {
+        if(isEmpty()){
+            throw new TreeException("Binary Tree is empty");
+        }
+        return binarySearch2(root, element);
+    }
+
+    //método interno
+    private BTreeNode binarySearch2(BTreeNode node, Object element){
+        if(node==null)
+            return null;
+
+        if(util.Utility.compare(node.data, element)==0)
+            return node;
+
+        if (binarySearch2(node.left, element) != null)
+            return binarySearch2(node.left,element);
+
+        return binarySearch2(node.right, element);
+
+    }
+
     @Override
     public void add(Object element) {
         //this.root = add(root, element);
@@ -277,6 +300,20 @@ public class BTree implements Tree {
         return result;
     }
 
+    public int heigth(Object obj) throws TreeException {
+
+        BTreeNode node = contains2(obj);
+        String str = node.path;
+        int counter = 0;
+        for (int i = 0; i <str.length() ; i++) {
+            if (str.charAt(i)== '/'){
+                counter++;
+            }
+
+        }
+        return counter;
+    }
+
 
     public String preorderTour(BTreeNode node) {
         String result="";
@@ -322,5 +359,6 @@ public class BTree implements Tree {
         result+=" PostOrder: \n"+postOrder(root)+"\n";
         return result;
     }
+
 
 }
