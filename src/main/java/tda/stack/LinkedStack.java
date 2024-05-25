@@ -78,7 +78,7 @@ public class LinkedStack implements Stack {
     @Override
     public String toString() {
         if(isEmpty()) return "Linked Stack is Empty";
-        String result = "";
+        String result = "Linked Stack Content\n";
         try {
             LinkedStack aux = new LinkedStack();
             while(!isEmpty()){           

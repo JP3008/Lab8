@@ -363,9 +363,16 @@ public class CircularDoublyLinkedList implements List {
     public String toString() {
         String result = "Circular Doubly Linked List Content\n\n";
         Node aux = first;
+        int count=0;
         while(aux!=last){
-            result+= aux.data+"\n";
+            if (count==30){
+            result+= aux.data+" \n";
+            count=1;
+            }else {
+                result+= aux.data+" ";
+            }
             aux = aux.next;
+            count++;
         }
         return result + "\n" + aux.data;//agrega la data del ultimo nodo
     }

@@ -2,6 +2,8 @@ package domain;
 
 import util.Utility;
 
+import java.util.IllegalFormatCodePointException;
+
 public class BTree implements Tree {
     private BTreeNode root; //unica entrada al arbol
 
@@ -103,7 +105,19 @@ public class BTree implements Tree {
         if (isEmpty())
             throw new TreeException("Binary Tree is empty");
         root = remove(root, element);
+        if (root != null) {
+            updatePaths(root, "root");
+        }
     }
+
+    private void updatePaths(BTreeNode node, String path){
+        if (node != null) {
+        node.path = path;
+        updatePaths(node.left, path + "/left");
+        updatePaths(node.right, path + "/right");
+    }
+    }
+
 
     private BTreeNode remove(BTreeNode node, Object element) {
         if (node != null) {
@@ -111,8 +125,10 @@ public class BTree implements Tree {
                 if (node.left == null && node.right == null) {
                     return null; // Caso 1: sin hijos
                 } else if (node.left == null) {
+                    //node.right = newPath(node.right,node.path);
                     return node.right; // Caso 2: un hijo (derecha)
                 } else if (node.right == null) {
+                    //node.left = newPath(node.left,node.path);
                     return node.left; // Caso 2: un hijo (izquierda)
                 } else {
                     // Caso 3: dos hijos
@@ -215,7 +231,7 @@ public class BTree implements Tree {
     public String preOrder(BTreeNode node){
         String result="";
         if(node!=null){
-            result =  node.data+"("+node.path+") ";
+            result =  node.data+"("+node.path+")"+"\n";
             result += preOrder(node.left);
             result += preOrder(node.right);
         }
@@ -235,7 +251,7 @@ public class BTree implements Tree {
         String result="";
         if(node!=null){
             result  = inOrder(node.left);
-            result += node.data+" ";
+            result += node.data+"("+node.path+") "+"\n";
             result += inOrder(node.right);
         }
         return result;
@@ -255,7 +271,7 @@ public class BTree implements Tree {
         if(node!=null){
             result = postOrder(node.left);
             result += postOrder(node.right);
-            result += node.data+" ";
+            result += node.data+"("+node.path+")"+"\n";
 
         }
         return result;
@@ -298,9 +314,12 @@ public class BTree implements Tree {
         if(isEmpty())
             return "Binary Tree is empty";
         String result = "BINARY TREE TOUR...\n";
-        result+="PreOrder: "+preOrder(root)+"\n";
-        result+="InOrder: "+inOrder(root)+"\n";
-        result+="PostOrder: "+postOrder(root)+"\n";
+        result+="o---o---o---o---o---o---o---o---o---o---o\n";
+        result+=" PreOrder: \n"+preOrder(root)+"\n";
+        result+="o---o---o---o---o---o---o---o---o---o---o\n";
+        result+=" InOrder: \n"+inOrder(root)+"\n";
+        result+="o---o---o---o---o---o---o---o---o---o---o\n";
+        result+=" PostOrder: \n"+postOrder(root)+"\n";
         return result;
     }
 

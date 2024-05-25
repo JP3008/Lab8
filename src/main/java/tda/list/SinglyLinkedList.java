@@ -315,8 +315,15 @@ public class SinglyLinkedList implements List {
     public String toString() {
         String result = "Singly Linked List Content\n\n";
         Node aux = first;
+        int count=0;
         while(aux!=null){
-            result+= aux.data+"\n";
+            if (count==30) {
+                result += aux.data + " \n";
+                count=1;
+            }else{
+                result += aux.data+" ";
+            }
+            count++;
             aux = aux.next;
         }
         return result;

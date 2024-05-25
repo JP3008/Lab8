@@ -168,12 +168,19 @@ public class LinkedQueue implements Queue {
     @Override
     public String toString(){
         if(isEmpty()) return "Linked Queue is Empty";
-        String result = "\n";
+        String result = "Linked Queue Content\n";
         try {
+            int count = 0;
             LinkedQueue aux = new LinkedQueue();
             while(!isEmpty()){
-                result+=front()+"\n";
+                if (count==30) {
+                    result += front() + " \n";
+                    count=1;
+                }else{
+                    result += front() + " ";
+                }
                 aux.enQueue(deQueue());
+                count++;
             }
             //al final dejamos la cola en su estado original
             while(!aux.isEmpty()){
