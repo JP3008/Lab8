@@ -44,7 +44,7 @@ public class GraphicBTreeController {
     @FXML
     public void RandomizeButton() {
         bTree = new BTree();
-        int numberOfNodes = util.Utility.getRandom(24) ;
+        int numberOfNodes = util.Utility.getRandom(15) ;
         for (int i = 0; i < numberOfNodes; i++) {
             bTree.add(util.Utility.getRandom(100)); // Usando valores aleatorios entre 0 y 99
         }
@@ -174,8 +174,10 @@ public class GraphicBTreeController {
         }else{
             try {
                 Alert alertTreeTour = new Alert(Alert.AlertType.INFORMATION);
-                alertTreeTour.setContentText(bTree.BtreeTour() + "\n" + "\n"
-                        + bTree.inOrder() + "\n" + "\n"
+                alertTreeTour.setTitle("Tree Tour Information");
+                alertTreeTour.setHeaderText(null);
+                alertTreeTour.setContentText(bTree.preOrder() + "\n"
+                        + bTree.inOrder() + "\n"
                         + bTree.postOrder());
                 alertTreeTour.showAndWait();
             }catch (TreeException tE){

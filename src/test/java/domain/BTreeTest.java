@@ -81,7 +81,7 @@ class BTreeTest {
         System.out.println("///////////////////////////");
         bt.add(btreeChars);
 
-        System.out.println("Original tree: \n"+bt);
+        System.out.println("Original tree: \n"+bt.toString2());
         System.out.println("///////////////////////////");
         System.out.println("Size of tree "+bt.size());
         System.out.println("///////////////////////////");
@@ -120,7 +120,7 @@ class BTreeTest {
 
 
         //Resultados
-        System.out.println("Modified tree: \n"+bt);
+        System.out.println("Modified tree: \n"+bt.toString2());
         System.out.println("///////////////////////////");
 
         System.out.println("Height of SinglyLinkedList: "+bt.height(sl));

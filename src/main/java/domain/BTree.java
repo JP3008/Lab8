@@ -254,7 +254,7 @@ public class BTree implements Tree {
     public String preOrder(BTreeNode node){
         String result="";
         if(node!=null){
-            result =  node.data+"("+node.path+")"+"\n";
+            result =  node.data+"("+node.path+") "+"\n";
             result += preOrder(node.left);
             result += preOrder(node.right);
         }
@@ -280,6 +280,7 @@ public class BTree implements Tree {
         return result;
     }
 
+
     @Override
     public String postOrder() throws TreeException {
         if (isEmpty()) {
@@ -294,11 +295,12 @@ public class BTree implements Tree {
         if(node!=null){
             result = postOrder(node.left);
             result += postOrder(node.right);
-            result += node.data+"("+node.path+")"+"\n";
+            result += node.data+"("+node.path+") "+"\n";
 
         }
         return result;
     }
+
 
     public int heigth(Object obj) throws TreeException {
 
@@ -346,8 +348,8 @@ public class BTree implements Tree {
     //preOrder: recorre el árbol de la forma: nodo-izq-der
     //inOrder: recorre el árbol de la forma: izq-nodo-der
     //postOrder: recorre el árbol de la forma: izq-der-nodo
-    @Override
-    public String toString() {
+
+    public String toString2() {
         if(isEmpty())
             return "Binary Tree is empty";
         String result = "BINARY TREE TOUR...\n";
@@ -357,6 +359,20 @@ public class BTree implements Tree {
         result+=" InOrder: \n"+inOrder(root)+"\n";
         result+="o---o---o---o---o---o---o---o---o---o---o\n";
         result+=" PostOrder: \n"+postOrder(root)+"\n";
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        if(isEmpty())
+            return "Binary Tree is empty";
+        String result = "";
+        result+="o---o---o---o---o---o---o---o---o---o---o\n";
+        result+=" PreOrder: "+preOrder(root)+" ";
+        result+="o---o---o---o---o---o---o---o---o---o---o\n";
+        result+=" InOrder:"+inOrder(root)+" ";
+        result+="o---o---o---o---o---o---o---o---o---o---o\n";
+        result+=" PostOrder:"+postOrder(root)+" ";
         return result;
     }
 
